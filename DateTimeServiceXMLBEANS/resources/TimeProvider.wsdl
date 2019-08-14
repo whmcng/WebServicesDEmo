@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://injenity.net" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://injenity.net" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax21="http://util.java/xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+<wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+  <wsdl:types>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://util.java/xsd">
+            <xs:complexType name="GregorianCalendar">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="calendarType" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="gregorianChange" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="timeZone" nillable="true" type="ax21:TimeZone"/>
+                    <xs:element minOccurs="0" name="weekDateSupported" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="weekYear" type="xs:int"/>
+                    <xs:element minOccurs="0" name="weeksInWeekYear" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="TimeZone">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="DSTSavings" type="xs:int"/>
+                    <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="displayName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="rawOffset" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://injenity.net" xmlns:ax22="http://util.java/xsd">
+            <xs:import namespace="http://util.java/xsd"/>
+            <xs:element name="getDate">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="set" nillable="true" type="xs:date"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getDateResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:date"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getCalendar">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="cal" nillable="true" type="ax22:GregorianCalendar"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getCalendarResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax22:GregorianCalendar"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getDateResponse">
+    <wsdl:part name="parameters" element="ns:getDateResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCalendarResponse">
+    <wsdl:part name="parameters" element="ns:getCalendarResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDateRequest">
+    <wsdl:part name="parameters" element="ns:getDate">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCalendarRequest">
+    <wsdl:part name="parameters" element="ns:getCalendar">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="TimeProviderPortType">
+    <wsdl:operation name="getDate">
+      <wsdl:input message="ns:getDateRequest" wsaw:Action="urn:getDate">
+    </wsdl:input>
+      <wsdl:output message="ns:getDateResponse" wsaw:Action="urn:getDateResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCalendar">
+      <wsdl:input message="ns:getCalendarRequest" wsaw:Action="urn:getCalendar">
+    </wsdl:input>
+      <wsdl:output message="ns:getCalendarResponse" wsaw:Action="urn:getCalendarResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TimeProviderSoap12Binding" type="ns:TimeProviderPortType">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getDate">
+      <soap12:operation soapAction="urn:getDate" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCalendar">
+      <soap12:operation soapAction="urn:getCalendar" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TimeProviderSoap11Binding" type="ns:TimeProviderPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getDate">
+      <soap:operation soapAction="urn:getDate" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCalendar">
+      <soap:operation soapAction="urn:getCalendar" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TimeProviderHttpBinding" type="ns:TimeProviderPortType">
+    <http:binding verb="POST"/>
+    <wsdl:operation name="getDate">
+      <http:operation location="getDate"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCalendar">
+      <http:operation location="getCalendar"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TimeProvider">
+    <wsdl:port name="TimeProviderHttpSoap11Endpoint" binding="ns:TimeProviderSoap11Binding">
+      <soap:address location="http://localhost:9090/DateTimeService/services/TimeProvider.TimeProviderHttpSoap11Endpoint/"/>
+    </wsdl:port>
+    <wsdl:port name="TimeProviderHttpSoap12Endpoint" binding="ns:TimeProviderSoap12Binding">
+      <soap12:address location="http://localhost:9090/DateTimeService/services/TimeProvider.TimeProviderHttpSoap12Endpoint/"/>
+    </wsdl:port>
+    <wsdl:port name="TimeProviderHttpEndpoint" binding="ns:TimeProviderHttpBinding">
+      <http:address location="http://localhost:9090/DateTimeService/services/TimeProvider.TimeProviderHttpEndpoint/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

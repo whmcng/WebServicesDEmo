@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//src/net/injenity/TimeProvider.java=UTF-8
+encoding//src/net/injenity/TimeProviderLocator.java=UTF-8
+encoding//src/net/injenity/TimeProviderPortType.java=UTF-8
+encoding//src/net/injenity/TimeProviderSoap11BindingImpl.java=UTF-8
+encoding//src/net/injenity/TimeProviderSoap11BindingSkeleton.java=UTF-8
+encoding//src/net/injenity/TimeProviderSoap11BindingStub.java=UTF-8
